@@ -1,4 +1,4 @@
-FROM nginx-unprivileged:1.16.1-alpine
+FROM nginxinc/nginx-unprivileged:1.23-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN apt update
 USER root
