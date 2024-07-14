@@ -6,6 +6,6 @@ RUN chmod -R 777 /etc/nginx/nginx.conf
 RUN chmod -R 777 /var/cache/nginx/client_temp
 RUN chmod -R 777 /run/s6
 RUN chmod -R 777 /run/service 
-EXPOSE 80 
-EXPOSE 443 
+EXPOSE 8080 
+EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]
