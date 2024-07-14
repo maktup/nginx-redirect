@@ -1,4 +1,4 @@
-FROM nginx:1.27.0-alpine-slim
+FROM nginx/nginx-ingress:latest-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 EXPOSE 443 
