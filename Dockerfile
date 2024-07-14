@@ -4,6 +4,8 @@ USER root
 RUN mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/uwsgi_temp /var/cache/nginx/scgi_temp
 RUN chmod -R 777 /etc/nginx/nginx.conf
 RUN chmod -R 777 /var/cache/nginx/client_temp
+RUN chmod -R 777 /run/s6
+RUN chmod -R 777 /run/service
 EXPOSE 80
 EXPOSE 443 
 CMD ["nginx", "-g", "daemon off;"]
