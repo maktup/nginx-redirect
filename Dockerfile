@@ -1,11 +1,18 @@
-FROM nginxinc/nginx-unprivileged
-COPY nginx.conf /etc/nginx/nginx.conf
-USER root
-RUN mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/uwsgi_temp /var/cache/nginx/scgi_temp /run/s6 /run/service
-RUN chmod -R 777 /etc/nginx/nginx.conf
-RUN chmod -R 777 /var/cache/nginx/client_temp
-RUN chmod -R 777 /run/s6
-RUN chmod -R 777 /run/service 
-EXPOSE 8080 
-EXPOSE 443
+FROM nginx:1.26.0-alpine
+
+# Remove default welcome page
+RUN rm /usr/share/nginx/html/index.html
+
+# 1. support running as arbitrary user which belogs to the root group
+# 2. users are not allowed to listen on priviliged ports
+# 3. comment user directive as master process is run as user in OpenShift anyhow
+RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx && \
+    chgrp -R root /var/cache/nginx && \
+    sed -i.bak 's/listen\(.*\)80;/listen 8081;/' /etc/nginx/conf.d/default.conf && \
+    sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf && \
+    addgroup nginx root
+
+EXPOSE 8081
+
+USER nginx
 CMD ["nginx", "-g", "daemon off;"]
