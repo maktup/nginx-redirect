@@ -9,7 +9,6 @@ RUN mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp /var/cache
 RUN chown -R www:www /var/cache/nginx
 
 RUN chmod -R 777 /etc/nginx/nginx.conf
-RUN mkdir /var/cache/nginx/client_temp
 RUN chmod -R 777 /var/cache/nginx/client_temp
 
 EXPOSE 80
