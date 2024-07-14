@@ -8,6 +8,7 @@ RUN chmod -R 777 /etc/nginx/nginx.conf
 RUN chmod -R 777 /var/cache/nginx/client_temp
 RUN chmod -R 777 /run/s6
 RUN chmod -R 777 /run/service
+RUN chown -R user:user docker/appdata
 EXPOSE 80 
 EXPOSE 443 
 CMD ["nginx", "-g", "daemon off;"]
