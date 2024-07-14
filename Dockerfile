@@ -1,7 +1,7 @@
 FROM jc21/nginx-proxy-manager:latest
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN apt update
-RUN apt install libcap2-bin
+RUN apt install libcap2-bin -y
 USER root
 RUN mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/uwsgi_temp /var/cache/nginx/scgi_temp /run/s6 /run/service
 RUN chmod -R 777 /etc/nginx/nginx.conf
