@@ -3,6 +3,8 @@ FROM nginx:1.26.0-alpine
 # Remove default welcome page
 RUN rm /usr/share/nginx/html/index.html
 
+COPY nginx.conf /etc/nginx/nginx.conf
+
 # 1. support running as arbitrary user which belogs to the root group
 # 2. users are not allowed to listen on priviliged ports
 # 3. comment user directive as master process is run as user in OpenShift anyhow
@@ -16,3 +18,4 @@ EXPOSE 8081
 
 USER nginx
 CMD ["nginx", "-g", "daemon off;"]
+ 
